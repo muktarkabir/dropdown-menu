@@ -1,0 +1,18 @@
+.drop-down {
+  height: 60px;
+  aspect-ratio: 10/4;
+  span {
+    color: currentColor;
+  }
+  .dots {
+    position: relative;
+  }
+  .menu {
+    position: absolute;
+    left: 20px;
+    background-color: grey;
+    padding: 4px;
+    border-radius: 6px;
+    min-width: max-content;
+  }
+}
