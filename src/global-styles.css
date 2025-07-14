@@ -1,6 +1,4 @@
 .drop-down {
-  height: 60px;
-  aspect-ratio: 10/4;
   span {
     color: currentColor;
   }
@@ -16,6 +14,8 @@
     min-width: max-content;
     border: 1px solid blue;
     display: none;
+    background-color: #fff;
+    z-index: 2;
   }
   .item:hover {
     background-color: rgb(236, 236, 236);
