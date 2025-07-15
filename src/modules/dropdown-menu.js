@@ -1,3 +1,4 @@
+import "./dropdown.css";
 export const dropDownMenu = (...args) => {
   const dropDownMenu = document.createElement("div");
   dropDownMenu.classList.add("drop-down");
@@ -11,16 +12,15 @@ export const dropDownMenu = (...args) => {
     const item = document.createElement("div");
     item.classList.add("item");
     item.innerHTML = `${arguemt}`;
+    item.addEventListener("click", closeMenu);
     menu.append(item);
   });
   dropDownMenu.append(dots, menu);
   dots.addEventListener("click", () => {
     if (menu.style.display === "none") {
-      menu.setAttribute("style", "display: block");
-      menu.dataset.open = true;
+      openMenu();
     } else {
-      menu.setAttribute("style", "display: none");
-      menu.dataset.open = false;
+      closeMenu();
     }
   });
   window.addEventListener("click", function (e) {
@@ -29,12 +29,20 @@ export const dropDownMenu = (...args) => {
       !dots.contains(e.target) &&
       menu.dataset.open === "true"
     ) {
-      menu.setAttribute("style", "display: none");
-      menu.dataset.open = false;
+      closeMenu();
     } else {
       return;
     }
   });
+
+  function openMenu() {
+    menu.setAttribute("style", "display: block");
+    menu.dataset.open = true;
+  }
+  function closeMenu() {
+    menu.setAttribute("style", "display: none");
+    menu.dataset.open = false;
+  }
 
   return dropDownMenu;
 };
