@@ -2,12 +2,15 @@ import "./dropdown.css";
 export const dropDownMenu = (...args) => {
   const dropDownMenu = document.createElement("div");
   dropDownMenu.classList.add("drop-down");
-  const dots = document.createElement("div");
+  const dots = document.createElement("p");
   dots.classList.add("dots");
+  //   dots.style.position = 'relative';
   dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`;
+  dropDownMenu.append(dots);
   const menu = document.createElement("div");
   menu.classList.add("menu");
   menu.dataset.open = false;
+  //   menu.style.position = 'absolute';
   args.forEach((arguemt) => {
     const item = document.createElement("div");
     item.classList.add("item");
@@ -15,7 +18,7 @@ export const dropDownMenu = (...args) => {
     item.addEventListener("click", closeMenu);
     menu.append(item);
   });
-  dropDownMenu.append(dots, menu);
+  dropDownMenu.append(menu);
   dots.addEventListener("click", () => {
     if (menu.style.display === "none") {
       openMenu();

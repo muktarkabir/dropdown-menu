@@ -1,21 +1,22 @@
 .drop-down {
+    position: relative;
   span {
     color: currentColor;
   }
   .dots {
-    position: relative;
     cursor: pointer;
   }
   .menu {
     position: absolute;
-    left: 20px;
-    padding: 4px;
+    left: 0;
+    top: 16px;
+    padding: 2px 8px;
     border-radius: 6px;
     min-width: max-content;
-    border: 1px solid blue;
+    border: 1px solid currentColor;
     display: none;
     background-color: #fff;
-    z-index: 2;
+    z-index: 20;
   }
   .item:hover {
     background-color: rgb(236, 236, 236);
