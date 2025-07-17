@@ -1,28 +1,3 @@
-.drop-down {
-  p{
-    display: inline-block;
-  }
-    position: relative;
-  span {
-    color: currentColor;
-  }
-  .dots {
-    cursor: pointer;
-  }
-  .menu {
-    position: absolute;
-    left: 0;
-    top: 16px;
-    padding: 2px 8px;
-    border-radius: 6px;
-    min-width: max-content;
-    border: 1px solid currentColor;
-    display: none;
-    background-color: #fff;
-    z-index: 20;
-  }
-  .item:hover {
-    background-color: rgb(236, 236, 236);
-    cursor: pointer;
-  }
+body{
+  margin: 500px;
 }

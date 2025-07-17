@@ -16,36 +16,36 @@ export const dropDownMenu = ({ anchor, vertical, items }) => {
   const dots = document.createElement("p");
   dots.style.cursor = "pointer";
   dots.style.position = "relative";
+  dots.style.fontSize = ".9rem";
   vertical
     ? (dots.innerHTML = `<span>●</span><br/><span>●</span><br/><span>●</span>`)
     : (dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`);
-  // dropDownMenu.append(dots);
   const menu = document.createElement("div");
   document.body.append(menu);
   document.body.append(dots);
   menu.dataset.open = false;
   menu.style.position = "absolute";
-  menu.style.left = 0;
-  menu.style.top = `100%`;
   menu.style.zIndex = 50;
-  menu.style.minWidth = "max-content";
+  menu.style.minWidth = "8ch";
   menu.style.backgroundColor = "#fff";
+  menu.style.fontSize = "1rem";
   menu.style.display = "none";
-  menu.style.padding = "2px 6px";
+  menu.style.padding = "2px 0px";
   menu.style.borderRadius = "4px";
   menu.style.border = "1px solid currentColor";
   positionMenu();
-  items.forEach((arguemt) => {
+  items.forEach((arguemt, index) => {
     if (typeof arguemt !== "string") {
       throw new Error("arguments must be strings");
     }
     const item = document.createElement("div");
     item.style.cursor = "pointer";
+    if (index !== 0) item.style.borderTop = "1px solid currentColor";
+    item.style.padding = "6px";
     item.innerHTML = `${arguemt}`;
     item.addEventListener("click", closeMenu);
     menu.append(item);
   });
-  // dropDownMenu.append(menu);
   dots.addEventListener("click", () => {
     if (menu.style.display === "none") {
       openMenu();
@@ -78,10 +78,8 @@ export const dropDownMenu = ({ anchor, vertical, items }) => {
   }
   function positionMenu() {
     const rect = dots.getBoundingClientRect();
-    console.log(rect);
-
-    menu.style.top = `${rect.bottom}px`;
-    menu.style.left = `${rect.left}px`;
+    menu.style.top = `${rect.bottom + 4 + window.scrollY}px`;
+    menu.style.left = `${rect.left + window.scrollX}px`;
   }
 
   return dots;
