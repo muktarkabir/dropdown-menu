@@ -1,9 +1,28 @@
 import "./dropdown.css";
-export const dropDownMenu = ({ anchor, vertical, items }) => {
+export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
+  if (!parent) {
+    throw new Error("Provide a parent element");
+  }
+  if (parent) {
+    if (!(parent instanceof Element)) {
+      throw new Error("Parent element must be a valid html object.");
+    }
+    if (!document.body.contains(parent)) {
+      throw new Error("Parent must be inside the body of the document.");
+    }
+  }
   if (anchor) {
-    if (typeof anchor !== Element) {
+    if (!(anchor instanceof Element)) {
       throw new Error("Anchor must be a valid html object.");
     }
+    if (!document.body.contains(anchor)) {
+      throw new Error("Anchor must be inside the body of the document.");
+    }
+  }
+  if (anchor && parent) {
+    throw new Error(
+      "There cannot be a parent element if there is an anchor element.",
+    );
   }
   if (vertical) {
     if (typeof vertical !== "boolean") {
@@ -15,14 +34,14 @@ export const dropDownMenu = ({ anchor, vertical, items }) => {
   }
   const dots = document.createElement("p");
   dots.style.cursor = "pointer";
-  dots.style.position = "relative";
   dots.style.fontSize = ".9rem";
   vertical
     ? (dots.innerHTML = `<span>●</span><br/><span>●</span><br/><span>●</span>`)
     : (dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`);
   const menu = document.createElement("div");
   document.body.append(menu);
-  document.body.append(dots);
+  parent.append(dots);
+  parent.style.position = "relative";
   menu.dataset.open = false;
   menu.style.position = "absolute";
   menu.style.zIndex = 50;
@@ -64,9 +83,6 @@ export const dropDownMenu = ({ anchor, vertical, items }) => {
       return;
     }
   });
-  menu.addEventListener("click", (e) => {
-    console.log(e.target);
-  });
 
   function openMenu() {
     menu.style.display = "block";
@@ -78,9 +94,14 @@ export const dropDownMenu = ({ anchor, vertical, items }) => {
   }
   function positionMenu() {
     const rect = dots.getBoundingClientRect();
-    menu.style.top = `${rect.bottom + 4 + window.scrollY}px`;
+    console.log(rect);
+
+    menu.style.top = `${rect.bottom + window.scrollY}px`;
     menu.style.left = `${rect.left + window.scrollX}px`;
   }
+  function menuItems() {
+    return [...menu.children];
+  }
 
-  return dots;
+  return { dots, menuItems };
 };
