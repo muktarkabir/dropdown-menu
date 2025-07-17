@@ -12,3 +12,15 @@ body{
   margin-left: 70px;
   gap: 10px;
 }
+
+.anchor{
+  border-radius: 50%;
+  height: 70px;
+  aspect-ratio: 1;
+  background-color: green;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

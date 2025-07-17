@@ -1,7 +1,9 @@
 import "./dropdown.css";
 export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
-  if (!parent) {
-    throw new Error("Provide a parent element");
+  if (!parent && !anchor) {
+    throw new Error(
+      "Provide a parent element or an existing element to anchor drop down menu to",
+    );
   }
   if (parent) {
     if (!(parent instanceof Element)) {
@@ -18,6 +20,9 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
     if (!document.body.contains(anchor)) {
       throw new Error("Anchor must be inside the body of the document.");
     }
+    if (vertical) {
+      throw new Error("Cant accept a vertical value if using anchor property");
+    }
   }
   if (anchor && parent) {
     throw new Error(
@@ -32,16 +37,25 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   if (!Array.isArray(items)) {
     throw new Error("Items must be in an array");
   }
-  const dots = document.createElement("p");
-  dots.style.cursor = "pointer";
-  dots.style.fontSize = ".9rem";
-  vertical
-    ? (dots.innerHTML = `<span>●</span><br/><span>●</span><br/><span>●</span>`)
-    : (dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`);
+  let dots;
+  if (!anchor) {
+    dots = document.createElement("p");
+    dots.style.cursor = "pointer";
+    dots.style.fontSize = ".9rem";
+    dots.style.display = "inline-block";
+    dots.style.margin = "0";
+    vertical
+      ? (dots.innerHTML = `<span>●</span><br/><span>●</span><br/><span>●</span>`)
+      : (dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`);
+    parent.append(dots);
+    parent.style.position = "relative";
+  } else {
+    dots = anchor;
+    dots.style.cursor = "pointer";
+  }
+
   const menu = document.createElement("div");
   document.body.append(menu);
-  parent.append(dots);
-  parent.style.position = "relative";
   menu.dataset.open = false;
   menu.style.position = "absolute";
   menu.style.zIndex = 50;
@@ -96,12 +110,24 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
     const rect = dots.getBoundingClientRect();
     console.log(rect);
 
-    menu.style.top = `${rect.bottom + window.scrollY}px`;
-    menu.style.left = `${rect.left + window.scrollX}px`;
+    menu.style.top = `${rect.bottom + window.scrollY + 4}px`;
+    menu.style.left = `${rect.left + window.scrollX + 4}px`;
   }
   function menuItems() {
     return [...menu.children];
   }
+  const addClickListenerToMenuItem = ({ itemIndex, action }) => {
+    if (typeof itemIndex !== "number") {
+      throw new Error("Provide a number for the index");
+    }
+    if (!menu.children[itemIndex]) {
+      throw new Error("Please Provide an index within the range");
+    }
+    if (typeof action !== "function") {
+      throw new Error("Provide an valid function");
+    }
+    menu.children[itemIndex].addEventListener("click", action);
+  };
 
-  return { dots, menuItems };
+  return { menuButton: dots, menuItems, addClickListenerToMenuItem };
 };
