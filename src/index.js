@@ -2,8 +2,7 @@ import { dropDownMenu } from "./modules/dropdown-menu.js";
 
 const my = dropDownMenu({
   vertical: true,
-  items: ["edit", "delete", 3, "copy"],
+  items: ["edit", "delete", "move", "copy"],
 });
-const yours = dropDownMenu({ items: "l" });
+const yours = dropDownMenu({ items: ["edit", "Rename"] });
 document.body.append(my, yours);
-console.log(my.childNodes[1].childNodes[0]);
