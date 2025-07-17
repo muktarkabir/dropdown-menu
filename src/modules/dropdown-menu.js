@@ -41,12 +41,10 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   if (!anchor) {
     dots = document.createElement("p");
     dots.style.cursor = "pointer";
-    dots.style.fontSize = ".9rem";
+    dots.style.fontSize = "1.6rem";
     dots.style.display = "inline-block";
     dots.style.margin = "0";
-    vertical
-      ? (dots.innerHTML = `<span>●</span><br/><span>●</span><br/><span>●</span>`)
-      : (dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`);
+    vertical ? (dots.innerHTML = `⋮`) : (dots.innerHTML = `⋯`);
     parent.append(dots);
     parent.style.position = "relative";
   } else {
