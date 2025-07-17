@@ -1,17 +1,35 @@
 import "./dropdown.css";
-export const dropDownMenu = (...args) => {
+export const dropDownMenu = ({ anchor, vertical, items }) => {
+  if (anchor) {
+    if (typeof anchor !== Element) {
+      throw new Error("Anchor must be a valid html object.");
+    }
+  }
+  if (vertical) {
+    if (typeof vertical !== "boolean") {
+      throw new Error("Vertical option must be a boolean value.");
+    }
+  }
+  if (!Array.isArray(items)) {
+    throw new Error("Items must be in an array");
+  }
   const dropDownMenu = document.createElement("div");
   dropDownMenu.classList.add("drop-down");
   const dots = document.createElement("p");
   dots.classList.add("dots");
   //   dots.style.position = 'relative';
-  dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`;
+  vertical
+    ? (dots.innerHTML = `<span>●</span><br/><span>●</span><br/><span>●</span>`)
+    : (dots.innerHTML = `<span>●</span><span>●</span><span>●</span>`);
   dropDownMenu.append(dots);
   const menu = document.createElement("div");
   menu.classList.add("menu");
   menu.dataset.open = false;
   //   menu.style.position = 'absolute';
-  args.forEach((arguemt) => {
+  items.forEach((arguemt) => {
+    if (typeof arguemt !== "string") {
+      throw new Error("arguments must be strings");
+    }
     const item = document.createElement("div");
     item.classList.add("item");
     item.innerHTML = `${arguemt}`;

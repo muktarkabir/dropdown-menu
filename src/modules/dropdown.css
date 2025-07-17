@@ -1,4 +1,7 @@
 .drop-down {
+  p{
+    display: inline-block;
+  }
     position: relative;
   span {
     color: currentColor;
