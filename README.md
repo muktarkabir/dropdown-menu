@@ -10,13 +10,13 @@ A lightweight, dependency-free JavaScript module to create and attach a customiz
 Install from npm:
 
 ```bash
-npm install @muktarkabir/dropdown-menu
+npm install @muktarkabir/@muktarkabir/dropdown-menu
 ```
 
 Import the module in your project:
 
 ```js
-import { dropDownMenu } from "drop-down-menu";
+import { dropDownMenu } from "@muktarkabir/dropdown-menu";
 ```
 
 ---
@@ -72,7 +72,7 @@ An object with:
 ```
 
 ```js
-import { dropDownMenu } from "drop-down-menu";
+import { dropDownMenu } from "@muktarkabir/dropdown-menu";
 
 const container = document.getElementById("card");
 const { menuButton, addClickListenerToMenuItem } = dropDownMenu({
