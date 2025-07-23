@@ -1,20 +1,20 @@
 import { dropDownMenu } from "./modules/dropdown-menu.js";
 
-const my = dropDownMenu({
+const menu1 = dropDownMenu({
   parent: document.querySelector(".parent"),
   vertical: true,
   items: ["Edit", "Delete", "Move", "Copy"],
 });
 
-const yours = dropDownMenu({
+const menu2 = dropDownMenu({
   anchor: document.querySelector(".anchor"),
   items: ["Edit", "Rename"],
 });
-yours.menuItems()[0].addEventListener("click", (e) => {
+menu2.menuItems()[0].addEventListener("click", (e) => {
   console.log(e.target);
 });
 
-my.addClickListenerToMenuItem({
+menu1.addClickListenerToMenuItem({
   itemIndex: 1,
   action: (e) => {
     console.log(e.target);

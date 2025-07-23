@@ -39,17 +39,18 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   }
   let dots;
   if (!anchor) {
-    dots = document.createElement("p");
+    dots = document.createElement("div");
     dots.style.cursor = "pointer";
     dots.style.fontSize = "1.6rem";
     dots.style.display = "inline-block";
     dots.style.margin = "0";
+    dots.style.position = "relative";
     vertical ? (dots.innerHTML = `⋮`) : (dots.innerHTML = `⋯`);
     parent.append(dots);
-    parent.style.position = "relative";
   } else {
     dots = anchor;
     dots.style.cursor = "pointer";
+    dots.style.position = "relative";
   }
 
   const menu = document.createElement("div");
@@ -61,28 +62,32 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   menu.style.backgroundColor = "#fff";
   menu.style.fontSize = "1rem";
   menu.style.display = "none";
-  menu.style.padding = "2px 0px";
+  menu.style.padding = "0px";
   menu.style.borderRadius = "4px";
-  menu.style.border = "1px solid currentColor";
+  menu.style.border = "1px solid rgba(0,0,0,0.2)";
   positionMenu();
+
+  if (!anchor) {
+    dots.parentElement.style.position = "static";
+    dots.parentElement.append(menu);
+    console.log(dots.parentElement);
+    console.log(dots.style);
+  }
+
   items.forEach((arguemt, index) => {
     if (typeof arguemt !== "string") {
       throw new Error("arguments must be strings");
     }
+    //TODO:Make it so that html elements can be accepted.
     const item = document.createElement("div");
-    item.style.cursor = "pointer";
-    if (index !== 0) item.style.borderTop = "1px solid currentColor";
-    item.style.padding = "6px";
-    item.innerHTML = `${arguemt}`;
+    item.classList.add("item");
+    if (index !== 0) item.style.borderTop = "1px solid rgba(0,0,0,0.2)";
+    item.textContent = `${arguemt}`;
     item.addEventListener("click", closeMenu);
     menu.append(item);
   });
   dots.addEventListener("click", () => {
-    if (menu.style.display === "none") {
-      openMenu();
-    } else {
-      closeMenu();
-    }
+    menu.style.display === "none" ? openMenu() : closeMenu();
   });
   window.addEventListener("click", function (e) {
     if (
@@ -95,6 +100,8 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
       return;
     }
   });
+  window.addEventListener("resize", positionMenu);
+  window.addEventListener("scroll", positionMenu);
 
   function openMenu() {
     menu.style.display = "block";
@@ -106,10 +113,8 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   }
   function positionMenu() {
     const rect = dots.getBoundingClientRect();
-    console.log(rect);
-
-    menu.style.top = `${rect.bottom + window.scrollY + 4}px`;
-    menu.style.left = `${rect.left + window.scrollX + 4}px`;
+    menu.style.top = `${rect.bottom + 4}px`;
+    menu.style.left = `${rect.left}px`;
   }
   function menuItems() {
     return [...menu.children];
