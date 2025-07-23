@@ -1,4 +1,23 @@
 {
+  "name": "@muktarkabir/dropdown-menu",
+  "description": "A light-weight javascript library for dynamically creating dropdown menus",
+  "version": "1.0.0",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/muktarkabir/dropdown-menu"
+  },
+  "main": "src/modules/dropdown-menu.js",
+  "keywords": [
+    "dropdown-menu",
+    "component",
+    "javascript",
+    "menu",
+    "dropdown",
+    "html",
+    "css",
+    "vanilla"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.31.0",
     "css-loader": "^7.1.2",
