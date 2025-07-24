@@ -35,6 +35,10 @@ A default stylesheet is provided. You can override any styles by including your 
 .item:hover {
   background-color: #f0f8ff;
 }
+
+.dots{
+    color: orange;
+}
 ```
 
 ---
@@ -145,7 +149,7 @@ menu2.menuItemsContainer().addEventListener("click", (e) => {
 * **Dots**: default size `1.6rem`, you can override via:
 
   ```css
-  .menu {
+  .dots {
     font-size: 2rem;
   }
   ```
