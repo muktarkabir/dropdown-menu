@@ -1,5 +1,5 @@
 import "./dropdown.css";
-export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
+export const dropDownMenu = ({ anchor, parent, vertical = false, items }) => {
   if (!parent && !anchor) {
     throw new Error(
       "Provide a parent element or an existing element to anchor drop down menu to",
@@ -40,12 +40,8 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   let dots;
   if (!anchor) {
     dots = document.createElement("div");
-    dots.style.cursor = "pointer";
-    dots.style.fontSize = "1.6rem";
-    dots.style.display = "inline-block";
-    dots.style.margin = "0";
-    dots.style.position = "relative";
     vertical ? (dots.innerHTML = `⋮`) : (dots.innerHTML = `⋯`);
+    dots.classList.add("dots");
     parent.append(dots);
   } else {
     dots = anchor;
@@ -54,24 +50,15 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
   }
 
   const menu = document.createElement("div");
-  document.body.append(menu);
+  if (anchor) document.body.append(menu);
   menu.dataset.open = false;
-  menu.style.position = "absolute";
-  menu.style.zIndex = 50;
-  menu.style.minWidth = "8ch";
-  menu.style.backgroundColor = "#fff";
-  menu.style.fontSize = "1rem";
+  menu.classList.add("menu");
   menu.style.display = "none";
-  menu.style.padding = "0px";
-  menu.style.borderRadius = "4px";
-  menu.style.border = "1px solid rgba(0,0,0,0.2)";
   positionMenu();
 
   if (!anchor) {
     dots.parentElement.style.position = "static";
     dots.parentElement.append(menu);
-    console.log(dots.parentElement);
-    console.log(dots.style);
   }
 
   items.forEach((arguemt, index) => {
@@ -96,8 +83,6 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
       menu.dataset.open === "true"
     ) {
       closeMenu();
-    } else {
-      return;
     }
   });
   window.addEventListener("resize", positionMenu);
@@ -116,8 +101,8 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
     menu.style.top = `${rect.bottom + 4}px`;
     menu.style.left = `${rect.left}px`;
   }
-  function menuItems() {
-    return [...menu.children];
+  function menuItemsContainer() {
+    return menu;
   }
   const addClickListenerToMenuItem = ({ itemIndex, action }) => {
     if (typeof itemIndex !== "number") {
@@ -132,5 +117,5 @@ export const dropDownMenu = ({ anchor, parent, vertical, items }) => {
     menu.children[itemIndex].addEventListener("click", action);
   };
 
-  return { menuButton: dots, menuItems, addClickListenerToMenuItem };
+  return { menuButton: dots, menuItemsContainer, addClickListenerToMenuItem };
 };
