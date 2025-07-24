@@ -1,0 +1,25 @@
+body{
+  margin: 0;
+  padding-bottom: 600px;
+}
+
+.parent{
+  border: 2px solid black;
+  display:flex;
+  justify-items:center;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  margin-left: 200px;
+}
+
+.anchor{
+  border-radius: 50%;
+  height: 70px;
+  aspect-ratio: 1;
+  background-color: green;
+  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
