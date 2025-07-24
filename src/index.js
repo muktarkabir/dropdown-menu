@@ -1,4 +1,5 @@
 import { dropDownMenu } from "./modules/dropdown-menu.js";
+import "./global-styles.css";
 
 const menu1 = dropDownMenu({
   parent: document.querySelector(".parent"),
@@ -10,8 +11,8 @@ const menu2 = dropDownMenu({
   anchor: document.querySelector(".anchor"),
   items: ["Edit", "Rename"],
 });
-menu2.menuItems()[0].addEventListener("click", (e) => {
-  console.log(e.target);
+menu2.menuItemsContainer().addEventListener("click", (e) => {
+  console.log(e.target.innerHTML);
 });
 
 menu1.addClickListenerToMenuItem({
