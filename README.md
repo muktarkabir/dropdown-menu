@@ -65,7 +65,7 @@ Creates and attaches a dropdown menu.
 An object with:
 
 * `menuButton` (`Element`): The toggle element (dots or your anchor). Append this to the DOM if it was created internally.
-* `menuItems()` (`() => Element[]`): A function returning the list of created menu item elements.
+* `menuItemsContainer()` (`() => Element`): A function returning the dropdown menu.
 * `addClickListenerToMenuItem({ itemIndex, action })` (`Function`): Attach a custom callback to a specific item by index.
 
 ---
@@ -133,7 +133,7 @@ const menu2 = dropDownMenu({
   items: ["Edit", "Rename"],
 });
 
-//Alternatively add an event listener to the dropdowwn itself and use event delegation to register clicks
+//Alternatively add an event listener to the dropdowwn itself and use event delegation to register clicks on items.
 menu2.menuItemsContainer().addEventListener("click", (e) => {
   console.log('Clicked on item:', event.target.textContent);
 });
