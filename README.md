@@ -27,7 +27,12 @@ A default stylesheet is provided. You can override any styles by including your 
 
 ```css
 /* Example override */
-.drop-down .item:hover {
+.menu{
+    min-width: 12ch;
+    font-size:2rem;
+} 
+
+.item:hover {
   background-color: #f0f8ff;
 }
 ```
@@ -77,7 +82,7 @@ import { dropDownMenu } from "@muktarkabir/dropdown-menu";
 const container = document.getElementById("card");
 const { menuButton, addClickListenerToMenuItem } = dropDownMenu({
   parent: container,
-  vertical: false,
+  vertical: true,
   items: ["Edit", "Delete", "Share"]
 });
 
@@ -88,6 +93,19 @@ addClickListenerToMenuItem({
 });
 
 // If parent was used, the menu button is already appended; no further action needed.
+const menu1 = dropDownMenu({
+  parent: document.querySelector(".parent"),
+  vertical: false,
+  items: ["Edit", "Delete", "Move", "Copy"],
+});
+menu1.addClickListenerToMenuItem({
+  itemIndex: 1,
+  action: (e) => {
+    console.log(e.target);
+    console.log("Something");
+    window.location.reload();
+  },
+});
 ```
 
 ---
@@ -105,6 +123,18 @@ const { menuButton } = dropDownMenu({
   items: ["Settings", "Help"]
 });
 
+
+const menu2 = dropDownMenu({
+  anchor: document.querySelector(".anchor"),
+  items: ["Edit", "Rename"],
+});
+
+//Alternatively add an event listener to the dropdowwn itself and use event delegation to register clicks
+menu2.menuItemsContainer().addEventListener("click", (e) => {
+  console.log('Clicked on item:', event.target.textContent);
+});
+
+
 // The provided anchor will automatically toggle the dropdown on click.
 ```
 
@@ -115,7 +145,7 @@ const { menuButton } = dropDownMenu({
 * **Dots**: default size `1.6rem`, you can override via:
 
   ```css
-  .drop-down {
+  .menu {
     font-size: 2rem;
   }
   ```
