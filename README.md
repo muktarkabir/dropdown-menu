@@ -10,7 +10,7 @@ A lightweight, dependency-free JavaScript module to create and attach a customiz
 Install from npm:
 
 ```bash
-npm install @muktarkabir/@muktarkabir/dropdown-menu
+npm install @muktarkabir/dropdown-menu
 ```
 
 Import the module in your project:
@@ -135,7 +135,7 @@ const menu2 = dropDownMenu({
 
 //Alternatively add an event listener to the dropdowwn itself and use event delegation to register clicks on items.
 menu2.menuItemsContainer().addEventListener("click", (e) => {
-  console.log('Clicked on item:', event.target.textContent);
+  console.log('Clicked on item:', e.target.textContent);
 });
 
 
