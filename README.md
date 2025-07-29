@@ -45,6 +45,20 @@ A default stylesheet is provided. You can override any styles by including your 
 
 ## 📦 API
 
+There are two modules available for use: `anchorDropDownMenu` which is attached to an existing anchor element. `dotsDropDownMenu` which generates a dots button that toggles the visibility of the menu.
+
+### `anchorDropDownMenu(options)`
+
+Creates and attaches a dropdown menu to an existing element.
+
+#### Options
+
+| Property | Type      | Required                       | Default | 
+Description
+  |
+| ---------- | ---------- | ------------------------- | ------- | -------------------------------------------------------------------------------------------------------  |  
+| `parent` | `Element` | `yes`                          | 
+
 ### `dropDownMenu(options)`
 
 Creates and attaches a dropdown menu.
