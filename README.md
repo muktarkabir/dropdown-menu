@@ -102,7 +102,7 @@ import { anchorDropDownMenu,dotsDropDownMenu } from "@muktarkabir/dropdown-menu"
 
 const container = document.getElementById("parent");
 
-const menu1 = dropDownMenu({
+const menu1 = dotsDropDownMenu({
   parent: container,
   vertical: false,
   items: ["Edit", "Delete", "Move", "Copy"],
@@ -128,7 +128,7 @@ menu1.addClickListenerToMenuItem({
 ```js
 const anchor = document.getElementById("more-btn");
 
-const menu2 = dropDownMenu({
+const menu2 = anchorDropDownMenu({
   anchor: anchor,
   items: ["Edit", "Rename"],
 });
