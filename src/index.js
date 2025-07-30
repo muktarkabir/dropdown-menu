@@ -1,13 +1,16 @@
-import { dropDownMenu } from "./modules/dropdown-menu.js";
+import {
+  anchorDropDownMenu,
+  dotsDropDownMenu,
+} from "./modules/dropdown-menu.js";
 import "./global-styles.css";
 
-const menu1 = dropDownMenu({
+const menu1 = dotsDropDownMenu({
   parent: document.querySelector(".parent"),
   vertical: true,
   items: ["Edit", "Delete", "Move", "Copy"],
 });
 
-const menu2 = dropDownMenu({
+const menu2 = anchorDropDownMenu({
   anchor: document.querySelector(".anchor"),
   items: ["Edit", "Rename"],
 });

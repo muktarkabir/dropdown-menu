@@ -13,6 +13,7 @@ export const anchorDropDownMenu = ({ anchor, items }) => {
   menu.classList.add("menu");
   menu.style.display = "none";
   menu.dataset.open = false;
+  positionMenu();
   document.body.append(menu);
 
   items.forEach((arguemt, index) => {
@@ -92,6 +93,7 @@ export const dotsDropDownMenu = ({ parent, items, vertical = false }) => {
   menu.classList.add("menu");
   menu.style.display = "none";
   menu.dataset.open = false;
+  positionMenu();
   parent.style.position = "static";
   parent.append(menu);
 
